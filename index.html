@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Quiz App by Satpal singh</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>C programming language Quiz</h1>
+        <p id="question"></p>
+        <div id="choices"></div>
+         <p>Score: <span id="score">0</span></p> 
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: " 1. Which function is often used to output values and print text?",
+                choices: ["printf()", "output()", "cout<<"],
+                correctAnswer: "printf()"
+            },
+            {
+                question: " 2. Array indexes start with?",
+                choices: ["10", "1", "0"],
+                correctAnswer: "0"
+            },
+            {
+                question: " 3. Who is the father of C language?",
+                choices: ["Dennial Ritchie", "Bjarne Stroustrup", "Satpal Singh", "Dennis Ritchie"],
+                correctAnswer: "Dennis Ritchie"
+            },
+            {
+                question: " 4. C programming language developed in the year?",
+                choices: ["1977", "1972", "1990"],
+                correctAnswer: "1972"
+            },
+            {
+                question: " 5. In which of the following languages is function overloading not possible?",
+                choices: ["C", "JAVA", "C++"],
+                correctAnswer: "C"
+            },
+            {
+                question: " 6. If p is an integer pointer with a value 1000,them what will the value of p + 5 be?",
+                choices: ["1010", "1005", "1020"],
+                correctAnswer: "1020"
+            },
+            {
+                question: " 7. What is the size of the int data type (in bytes) in C?",
+                choices: ["8", "2", "4"],
+                correctAnswer: "4"
+            },
+            {
+                question: " 8. How is an array initialized in C language?",
+                choices: ["int arr=[1,3,5,7]", "int arr[]={1,3,5,7}", "int arr(2)={1,3,4}"],
+                correctAnswer: "int arr[]={1,3,5,7}"
+            },
+            {
+                question: " 9. All keywords in C are in?",
+                choices: ["CamelCase Letters", "UpperCase Letters", "LowerCase Letters"],
+                correctAnswer: "LowerCase Letters"
+            },
+            {
+                question: " 10. Which data structure is used to handle recursion in C language?",
+                choices: ["Stack", "Queue", "Tree"],
+                correctAnswer: "Stack"
+            },
+         
+
+             
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const questionElement = document.getElementById("question");
+        const choicesElement = document.getElementById("choices");
+        const scoreElement = document.getElementById("score");
+
+        function displayQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            questionElement.textContent = currentQuestion.question;
+            choicesElement.innerHTML = "";
+
+            currentQuestion.choices.forEach((choice, index) => {
+                const choiceButton = document.createElement("button");
+                choiceButton.textContent = choice;
+                choiceButton.addEventListener("click", () => {
+                    checkAnswer(choice);
+                });
+                choicesElement.appendChild(choiceButton);
+            });
+        }
+
+        function checkAnswer(selectedAnswer) {
+            const currentQuestion = questions[currentQuestionIndex];
+
+            if (selectedAnswer === currentQuestion.correctAnswer) {
+                score++;
+            }
+
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < questions.length) {
+                displayQuestion();
+            } else {
+                endQuiz();
+            }
+        }
+
+        function endQuiz() {
+            questionElement.textContent = "Quiz completed!";
+            choicesElement.innerHTML = "";
+            scoreElement.textContent = score + " / " + questions.length;
+        }
+
+        // Start the quiz 
+        displayQuestion();
+    </script>
+</body>
+
+</html>
